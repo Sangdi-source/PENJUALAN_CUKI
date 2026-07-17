@@ -50,7 +50,7 @@ df_penjualan = ambil_data("""
         FROM penjualan p 
         JOIN stok s ON p.nama_barang = s.nama_barang
     """)
-    df_pengeluaran = ambil_data("SELECT * FROM pengeluaran_bahan")
+df_pengeluaran = ambil_data("SELECT * FROM pengeluaran_bahan")
     
     # Perhitungan Dasar Omzet & HPP Produk Terjual
     if not df_penjualan.empty:
