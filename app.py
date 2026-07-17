@@ -31,7 +31,18 @@ menu = st.sidebar.radio(
 # ==================== HALAMAN 1: DASHBOARD & UNTUNG RUGI ====================
 if menu == "Dashboard & Untung Rugi":
     st.header("📈 Performa Bisnis & Analisis HPP")
-    
+
+cursor = conn.cursor()
+
+cursor.execute("""
+SELECT name
+FROM sqlite_master
+WHERE type='table';
+""")
+
+tables = cursor.fetchall()
+
+st.write("Daftar tabel:", tables)
     # Mengambil semua data dari 3 tabel
     df_stok = ambil_data("SELECT * FROM stok")
     df_penjualan = ambil_data("""
