@@ -32,25 +32,26 @@ menu = st.sidebar.radio(
 if menu == "Dashboard & Untung Rugi":
     st.header("📈 Performa Bisnis & Analisis HPP")
 
-cursor = conn.cursor()
+    conn = sqlite3.connect("penjualan.db")
+    cursor = conn.cursor()
 
-cursor.execute("""
-SELECT name
-FROM sqlite_master
-WHERE type='table';
-""")
+    cursor.execute("""
+    SELECT name
+    FROM sqlite_master
+    WHERE type='table';
+    """)
 
-tables = cursor.fetchall()
+    tables = cursor.fetchall()
 
-st.write("Daftar tabel:", tables)
+    st.write("Daftar tabel:", tables)
     # Mengambil semua data dari 3 tabel
-df_stok = ambil_data("SELECT * FROM stok")
-df_penjualan = ambil_data("""
+    df_stok = ambil_data("SELECT * FROM stok")
+    df_penjualan = ambil_data("""
         SELECT p.*, s.harga_beli, s.harga_jual 
         FROM penjualan p 
         JOIN stok s ON p.nama_barang = s.nama_barang
     """)
-df_pengeluaran = ambil_data("SELECT * FROM pengeluaran_bahan")
+    df_pengeluaran = ambil_data("SELECT * FROM pengeluaran_bahan")
     
     # Perhitungan Dasar Omzet & HPP Produk Terjual
     if not df_penjualan.empty:
