@@ -44,8 +44,8 @@ tables = cursor.fetchall()
 
 st.write("Daftar tabel:", tables)
     # Mengambil semua data dari 3 tabel
-    df_stok = ambil_data("SELECT * FROM stok")
-    df_penjualan = ambil_data("""
+df_stok = ambil_data("SELECT * FROM stok")
+df_penjualan = ambil_data("""
         SELECT p.*, s.harga_beli, s.harga_jual 
         FROM penjualan p 
         JOIN stok s ON p.nama_barang = s.nama_barang
